@@ -1,0 +1,258 @@
+# Publications list on the Research page, grouped into sections.
+# Taken from INSPIRE: https://inspirehep.net/authors/1912084
+#
+# Each item can have:
+#   title    – paper title (required); maths like $\mathcal{N}=2$ works (use single quotes)
+#   authors  – author list as one string; your name (author.name in _config.yml) is shown in bold
+#   venue    – journal (abbreviated), or e.g. "Preprint", "PhD thesis, University"
+#   volume   – journal volume, shown in bold
+#   year     – year of publication, shown in brackets
+#   pages    – page or article number
+#   status   – optional note, e.g. "to appear", "submitted"
+#   arxiv    – arXiv identifier only, in quotes, e.g. "2401.01234" (unquoted, a trailing 0 is lost)
+#   doi      – DOI only, e.g. 10.1000/xyz123
+#   pdf      – path to a PDF in the site, e.g. /assets/files/paper.pdf
+#   url      – any other link
+#   abstract – optional, Markdown (maths with $...$ works); the entry then opens to show it
+#   preview  – TEST, optional: image of the first page, shown beside the open entry on wide
+#              screens, e.g. /assets/img/papers/2401.01234.png (needs an abstract)
+#
+# Put the most recent first. Add, rename or remove sections freely.
+
+- section: Journal articles
+  items:
+    - title: 'Global forms of $\mathcal{N}=4$ theories and non-minimal Seiberg–Witten solutions'
+      authors: Robert Moscrop
+      venue: JHEP
+      volume: "10"
+      year: 2026
+      pages: "096"
+      arxiv: "2510.02055"
+      doi: 10.1007/JHEP10(2026)096
+      preview: /assets/img/papers/2510.02055.png
+      abstract: |
+        To each four dimensional $\mathcal{N}\geq 2$ supersymmetric quantum field theory, one
+        can associate an algebraic completely integrable (ACI) system that encodes the low
+        energy dynamics of theory. In this paper we explicitly derive the appropriate ACI
+        systems for the global forms of $\mathcal{N}=4$ super Yang-Mills (sYM) using isogenies
+        of polarised abelian varieties. In doing so, we relate the complex moduli of the
+        resulting varieties to the exactly marginal coupling of the theory, thus allowing us to
+        probe the $S$-duality groups of the global forms. Finally, we comment on whether the
+        resulting varieties are the Jacobians of a minimal genus Riemann surface, coming to the
+        conclusion that many global forms of $\mathcal{N}=4$ sYM do not admit a minimal genus
+        Seiberg-Witten curve that correctly reproduces the global form.
+
+    - title: 'Allowed Coulomb branch scaling dimensions of four-dimensional $\mathcal{N}=2$ SCFTs'
+      authors: Philip C. Argyres, Sergio Cecotti, Michele Del Zotto, Mario Martone, Robert Moscrop and Ben Smith
+      venue: JHEP
+      volume: "09"
+      year: 2025
+      pages: "107"
+      arxiv: "2409.03820"
+      doi: 10.1007/JHEP09(2025)107
+      preview: /assets/img/papers/2409.03820.png
+      abstract: |
+        A basic datum of a rank-$r$ $\mathcal{N}=2$ superconformal field theory (SCFT) is the
+        $r$-tuple of its Coulomb branch scaling dimensions, i.e., the scaling dimensions of a
+        set of special protected scalar operators whose vevs generate the coordinate ring of the
+        Coulomb branch of the theory. It is well known that when the coordinate ring is freely
+        generated these scaling dimensions can only take values in a small set of rational
+        numbers. But there are further constraints on which $r$-tuples of these numbers can
+        appear. The main aim of this work is to clarify what these are. Along the way we also
+        compute explicitly the $r$-tuples of allowed scaling dimensions for theories of ranks
+        $r = 2, 3, 4$.
+
+    - title: Completely (iso-)split scale-invariant Coulomb branch geometries are isotrivial
+      authors: Philip C. Argyres, Robert Moscrop, Souradeep Thakur and Mitch Weaver
+      venue: JHEP
+      volume: "06"
+      year: 2025
+      pages: "095"
+      arxiv: "2405.19395"
+      doi: 10.1007/JHEP06(2025)095
+      preview: /assets/img/papers/2405.19395.png
+      abstract: |
+        We show that scale-invariant special Kähler geometries whose generic
+        r-complex-dimensional abelian variety fiber is isomorphic (completely split) or
+        isogenous (completely iso-split) as a complex torus to the product of r one-dimensional
+        complex tori have constant $\tau^{ij}$ modulus on the Coulomb branch, i.e., are
+        isotrivial. These simple results are useful in organizing the classification of
+        scale-invariant special Kähler geometries, which, in turn, is relevant to the
+        classification of possible 4-dimensional $\mathcal{N}=2$ supersymmetric superconformal
+        field theories.
+
+    - title: Remarks on geometric engineering, symmetry TFTs and anomalies
+      authors: Michele Del Zotto, Shani Nadir Meynet and Robert Moscrop
+      venue: JHEP
+      volume: "07"
+      year: 2024
+      pages: "220"
+      arxiv: "2402.18646"
+      doi: 10.1007/JHEP07(2024)220
+      preview: /assets/img/papers/2402.18646.png
+      abstract: |
+        Geometric engineering is a collection of tools developed to establish dictionaries
+        between local singularities in string theory and (supersymmetric) quantum fields.
+        Extended operators and defects, as well as their higher quantum numbers captured by
+        topological symmetries, can be encoded within geometric engineering dictionaries. In
+        this paper we revisit and clarify aspects of these techniques, with special emphasis on
+        't Hooft anomalies, interpreted from the SymTFT perspective as obstructions to the
+        existence of Neumann boundary conditions. These obstructions to gauging higher
+        symmetries are captured via higher link correlators for the SymTFT on spheres. In this
+        work, we give the geometric engineering counterpart of this construction in terms of
+        higher links of topological membranes. We provide a consistency check in the context of
+        5D SCFTs with anomalous 1-form symmetries, where we give two independent derivations of
+        the anomaly in terms of higher links, one purely field theoretical and the other purely
+        geometrical. Along the way, we also recover the construction of non-invertible duality
+        defects in 4D $\mathcal N=4$ SYM from a geometric engineering perspective.
+
+    - title: McKay quivers and decomposition
+      authors: Shani Meynet and Robert Moscrop
+      venue: Lett. Math. Phys.
+      volume: "113"
+      year: 2023
+      pages: "63"
+      arxiv: "2208.07884"
+      doi: 10.1007/s11005-023-01685-9
+      preview: /assets/img/papers/2208.07884.png
+      abstract: |
+        When a quantum field theory in $d$-spacetime dimensions possesses a global $(d-1)$-form
+        symmetry, it can decompose into disjoint unions of other theories. This is reflected in
+        the physical quantities of the theory and can be used to study properties of the
+        constituent theories. In this note we highlight the equivalence between the
+        decomposition of orbifold $\sigma$-models and disconnected McKay quivers. Specifically,
+        we show in numerous examples that each component of a McKay quiver can be given
+        definitive geometric meaning through the decomposition formulae. In addition, we give a
+        purely group and representation theoretic derivation of the quivers for the cases where
+        the trivially acting part of the orbifold group is central. As expected, the resulting
+        quivers are compatible with the case of $\sigma$-models on ‘banded’ gerbes.
+
+    - title: Higher symmetries of 5D orbifold SCFTs
+      authors: Michele Del Zotto, Jonathan J. Heckman, Shani Nadir Meynet, Robert Moscrop and Hao Y. Zhang
+      venue: Phys. Rev. D
+      volume: "106"
+      year: 2022
+      pages: "046010"
+      arxiv: "2201.08372"
+      doi: 10.1103/PhysRevD.106.046010
+      preview: /assets/img/papers/2201.08372.png
+      abstract: |
+        We determine the higher symmetries of 5d SCFTs engineered from M-theory on a
+        $\mathbb{C}^3 / \Gamma$ background for $\Gamma$ a finite subgroup of $SU(3)$. This
+        resolves a longstanding question as to how to extract this data when the resulting
+        singularity is non-toric (when $\Gamma$ is non-abelian) and/or not isolated (when the
+        action of $\Gamma$ has fixed loci). The BPS states of the theory are encoded in a 1d
+        quiver quantum mechanics gauge theory which determines the possible 1-form and 2-form
+        symmetries. We also show that this same data can also be extracted by a direct
+        computation of the corresponding defect group associated with the orbifold singularity.
+        Both methods agree, and these computations do not rely on the existence of a resolution
+        of the singularity. We also observe that when the geometry faithfully captures the
+        global 0-form symmetry, the abelianization of $\Gamma$ detects a 2-group structure (when
+        present). As such, this establishes that all of this data is indeed intrinsic to the
+        superconformal fixed point rather than being an emergent property of an IR gauge theory
+        phase.
+
+    - title: 'The characteristic dimension of four-dimensional $\mathcal{N}=2$ SCFTs'
+      authors: Sergio Cecotti, Michele Del Zotto, Mario Martone and Robert Moscrop
+      venue: Commun. Math. Phys.
+      volume: "400"
+      year: 2023
+      pages: 519–540
+      arxiv: "2108.10884"
+      doi: 10.1007/s00220-022-04605-5
+      preview: /assets/img/papers/2108.10884.png
+      abstract: |
+        In this paper we introduce the characteristic dimension of a four dimensional
+        $\mathcal{N}=2$ superconformal field theory, which is an extraordinary simple invariant
+        determined by the scaling dimensions of its Coulomb branch operators. We prove that only
+        nine values of the characteristic dimension are allowed, $-\infty$, 1, 6/5, 4/3, 3/2, 2,
+        3, 4, and 6, thus giving a new organizing principle to the vast landscape of 4d
+        $\mathcal N=2$ SCFTs. Whenever the characteristic dimension differs from 1 or 2, only
+        very constrained special Kähler geometries (i.e. isotrivial, diagonal and rigid) are
+        compatible with the corresponding set of Coulomb branch dimensions and extremely
+        special, maximally strongly coupled, BPS spectra are allowed for the theories which
+        realize them. Our discussion applies to superconformal field theories of arbitrary rank,
+        i.e. with Coulomb branches of any complex dimension. Along the way, we predict the
+        existence of new $\mathcal{N}=3$ theories of rank two with non-trivial one-form
+        symmetries.
+
+    - title: 'Maruyoshi–Song flows and defect groups of $D_p^b(G)$ theories'
+      authors: Saghar S. Hosseini and Robert Moscrop
+      venue: JHEP
+      volume: "10"
+      year: 2021
+      pages: "119"
+      arxiv: "2106.03878"
+      doi: 10.1007/JHEP10(2021)119
+      preview: /assets/img/papers/2106.03878.png
+      abstract: |
+        We study the defect groups of $D_p^b(G)$ theories using geometric engineering and BPS
+        quivers. In the simple case when $b=h^\vee (G)$, we use the BPS quivers of the theory to
+        see that the defect group is compatible with a known Maruyoshi-Song flow. To extend to
+        the case where $b\neq h^\vee (G)$, we use a similar Maruyoshi-Song flow to conjecture
+        that the defect groups of $D_p^b(G)$ theories are given by those of $G^{(b)}[k]$
+        theories. In the cases of $G=A_n, \;E_6, \;E_8$ we cross check our result by calculating
+        the BPS quivers of the $G^{(b)}[k]$ theories and looking at the cokernel of their
+        intersection matrix.
+
+- section: Lecture notes
+  items:
+    - title: Simons lectures on categorical symmetries
+      authors: Davi Costa, Clay Córdova, Michele Del Zotto, Dan Freed, Jonte Gödicke, Aaron Hofer, David Jordan, Davide Morgante, Robert Moscrop, Kantaro Ohmori, Elias Riedel Gårding, Claudia Scheimbauer and Anja Švraka
+      venue: Lecture notes
+      year: 2024
+      arxiv: "2411.09082"
+      preview: /assets/img/papers/2411.09082.png
+      abstract: |
+        Global Categorical Symmetries are a powerful new tool for analyzing quantum field
+        theories. This volume compiles lecture notes from the 2022 and 2023 summer schools on
+        Global Categorical Symmetries, held at the Perimeter Institute for Theoretical Physics
+        and at the Swiss Map Research Station in Les Diableret. Specifically, this volume
+        collects the lectures:
+
+        * An introduction to symmetries in quantum field theory, Kantaro Ohmori
+        * Introduction to anomalies in quantum field theory, Clay Córdova
+        * Symmetry Categories 101, Michele Del Zotto
+        * Applied Cobordism Hypothesis, David Jordan
+        * Finite symmetry in QFT, Daniel S. Freed
+
+        These volumes are devoted to interested newcomers: we only assume (basic) knowledge of
+        quantum field theory (QFT) and some relevant maths. We try to give appropriate
+        references for non-standard materials that are not covered. Our aim in this first volume
+        is to illustrate some of the main questions and ideas together with some of the methods
+        and the techniques necessary to begin exploring global categorical symmetries of QFTs.
+
+- section: Theses
+  items:
+    - title: Quivers, superconformal field theories and higher symmetries
+      authors: Robert Moscrop
+      venue: PhD thesis, Uppsala University
+      year: 2023
+      url: https://inspirehep.net/literature/2668697
+      abstract: |
+        Quantum field theory (QFT) currently provides our best description of the natural world.
+        Over the past century, it has been able to accurately reproduce many experimental
+        results to an astonishing degree of accuracy and predict the existence of new particles.
+        Despite this, QFT suffers from several mathematical problems. One such problem is the
+        fact that it is often only possible to obtain perturbative results in a weak coupling
+        regime rather than exact results. However, if one constrains the system by introducing
+        supersymmetry, exact results become more tractable. In this thesis we aim to explore
+        various non-perturbative features of QFT by working with theories with eight
+        supercharges. Much of the material of this thesis aims to understand QFTs from the point
+        of view of BPS quivers — graphical objects that govern the worldlines of BPS states. By
+        understanding the geometric engineering of these objects, we then use them to extract
+        the higher symmetries of many theories. We also relate disconnected quivers in the
+        orbifold case to the decomposition of two dimensional sigma models.
+
+        A second problem tackled in this thesis is that of the classification problem of four
+        dimensional conformal theories with eight supercharges. More specifically, we define a
+        quantity which allows us to single out theories whose Donagi-Witten integrable system
+        simplifies tremendously. The simplifications make the classification problem more
+        tractable for this subset of theories and we initiate the study of them by presenting
+        two new putative rank-2 theories.
+
+    - title: 'Twistor theory: a geometric approach to integrability'
+      authors: Robert Moscrop
+      venue: MSc dissertation, University of Durham
+      year: 2018
+      pdf: /assets/files/msc-dissertation.pdf

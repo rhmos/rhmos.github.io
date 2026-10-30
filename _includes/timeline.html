@@ -1,0 +1,59 @@
+{%- comment -%}
+  Renders a dated list of entries.
+  Usage: {% include timeline.html title="Education" items=site.data.cv.education %}
+  Each item may have: title, place, location, start, end, details (Markdown), logo (image path),
+  logo_url (link for the logo), logo_name (logo tooltip, defaults to place), and a second logo that
+  pops out from behind the first on hover: logo_secondary, logo_secondary_url, logo_secondary_name.
+{%- endcomment -%}
+{%- if include.items and include.items.size > 0 %}
+<section>
+  <h2 class="section-title">{{ include.title }}</h2>
+  <ol class="timeline">
+    {%- for item in include.items %}
+    <li class="entry">
+      <div class="entry-dates">
+        {%- if item.start and item.end -%}
+          {{ item.start }}&nbsp;–&nbsp;{{ item.end }}
+        {%- elsif item.start -%}
+          {{ item.start }}&nbsp;–&nbsp;present
+        {%- else -%}
+          {{ item.end }}
+        {%- endif -%}
+      </div>
+      <div class="entry-body">
+        {%- if item.logo %}
+        {%- assign logo_name = item.logo_name | default: item.place | default: 'Institution' %}
+        {%- capture logo_img %}<img class="entry-logo" src="{{ item.logo | relative_url }}" alt="{{ logo_name }} logo" width="52" height="52">{% endcapture %}
+        <div class="entry-logos{% if item.logo_secondary %} has-secondary{% endif %}">
+          {%- if item.logo_secondary %}
+          {%- assign secondary_name = item.logo_secondary_name | default: 'Institution' %}
+          {%- capture secondary_img %}<img class="entry-logo" src="{{ item.logo_secondary | relative_url }}" alt="{{ secondary_name }} logo" width="52" height="52">{% endcapture %}
+          {%- if item.logo_secondary_url %}
+          <a class="entry-logo-link entry-logo-secondary" href="{{ item.logo_secondary_url }}" title="{{ secondary_name }}">{{ secondary_img }}</a>
+          {%- else %}
+          <span class="entry-logo-link entry-logo-secondary">{{ secondary_img }}</span>
+          {%- endif %}
+          {%- endif %}
+          {%- if item.logo_url %}
+          <a class="entry-logo-link" href="{{ item.logo_url }}" title="{{ logo_name }}">{{ logo_img }}</a>
+          {%- else %}
+          <span class="entry-logo-link">{{ logo_img }}</span>
+          {%- endif %}
+        </div>
+        {%- endif %}
+        <h3 class="entry-title">{{ item.title }}</h3>
+        {%- if item.place %}
+        <p class="entry-place">{{ item.place }}</p>
+        {%- endif %}
+        {%- if item.location %}
+        <p class="entry-location">{{ item.location }}</p>
+        {%- endif %}
+        {%- if item.details %}
+        <div class="entry-details">{{ item.details | markdownify }}</div>
+        {%- endif %}
+      </div>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- endif %}

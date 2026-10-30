@@ -1,0 +1,64 @@
+# Teaching page content, grouped into sections.
+#
+# Each course can have:
+#   title        – course name (required)
+#   code         – course code
+#   role         – e.g. Lecturer, Teaching Assistant, Tutor
+#   institution  – where you taught it
+#   terms        – list of terms, shown as tags
+#   url          – optional link to a course page or notes (a full URL, or a path like /teaching/linalg/)
+#   description  – optional Markdown
+#
+# Add, rename or remove sections freely.
+
+- section: Lecturer
+  courses:
+    - title: Transform methods
+      role: Lecturer
+      institution: Uppsala University
+      terms: [Autumn 2026]
+      description: Lectured the course (40 hours) to an audience of engineering students, and also tutored a group of approximately 20 students.
+
+- section: Teaching assistant
+  courses:
+    - title: Several variable calculus
+      role: Tutor
+      institution: Uppsala University
+      terms: [Spring 2023]
+      description: Tutored a group of 25 physics students. Topics included conic sections, vector operations and Stokes' theorem.
+
+    - title: Linear algebra II
+      role: Tutor
+      institution: Uppsala University
+      terms: [Autumn 2021, Autumn 2022]
+      description: Tutored two groups of 20 engineering and physics students in 2022, and a group of 25 engineering and computing students in 2021. The course covered vector spaces, linear maps and basic geometry.
+
+    - title: Transform methods
+      role: Tutor
+      institution: Uppsala University
+      terms: [Autumn 2021, Autumn 2022]
+      description: Tutored two groups of approximately 25 engineering students. Topics included Fourier series, Laplace transforms and separable PDEs.
+
+    - title: Complex analysis
+      role: Tutor
+      institution: Uppsala University
+      terms: [Spring 2021]
+      description: Tutored a group of 10 dual mathematics and teaching students. Topics included complex derivatives, contour integrals and the standard theorems of complex analysis.
+
+    - title: Statistics for biologists
+      role: Tutor
+      institution: Uppsala University
+      terms: [Spring 2021]
+      description: Tutored a group of 30 biology students over 15 sessions, including 5 data labs. An introduction to statistical tests, distributions and programming in R.
+
+    - title: Linear algebra I
+      role: Tutor
+      institution: Durham University
+      terms: [Autumn 2019]
+      description: Tutored three groups of 15 physics and mathematics students. A first-year introduction to vectors, linear maps and groups.
+
+    - title: Multi-variable calculus
+      role: Tutor
+      institution: Durham University
+      terms: [Spring 2019]
+      description: Tutored two groups of 20 mathematics students. The course focused on vector calculus and PDEs.

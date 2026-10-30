@@ -1,0 +1,90 @@
+# Education & Experience page content.
+#
+# Each entry can have:
+#   title     – degree or job title (required)
+#   place     – university or organisation
+#   location  – city, country
+#   start     – start year (leave out for single-date items such as awards)
+#   end       – end year; leave out to show "present"
+#   details   – optional Markdown: thesis, supervisor, bullet points, links…
+#   logo      – optional image shown beside the entry, e.g. /assets/img/logos/logo.png
+#   logo_url  – optional web address the logo links to
+#   logo_name – optional name for the logo's tooltip (defaults to place)
+#   logo_secondary, logo_secondary_url, logo_secondary_name
+#             – optional second logo that pops out to the right when the first is hovered
+#
+# Entries are shown in the order written here, so put the most recent first.
+
+experience:
+  - title: Postdoctoral Researcher
+    place: Department of Mathematics, Uppsala University
+    location: Uppsala, Sweden
+    start: 2026
+    logo: /assets/img/logos/logo.png
+    logo_url: https://www.uu.se/en/department/mathematics
+    details: blah.
+
+  - title: Postdoctoral Fellow
+    place: Center for Mathematical Sciences and Applications, Harvard University
+    location: Cambridge, USA
+    start: 2024
+    end: 2025
+    logo: /assets/img/logos/harvard.png
+    logo_url: https://www.math.harvard.edu/
+    logo_name: Harvard University
+    logo_secondary: /assets/img/logos/cmsa.png
+    logo_secondary_url: https://cmsa.fas.harvard.edu/
+    logo_secondary_name: Center for Mathematical Sciences and Applications
+    details: blah blah.
+
+  - title: Postdoctoral Researcher
+    place: Department of Physics, University of Cincinnati
+    location: Cincinnati, USA
+    start: 2023
+    end: 2024
+    logo: /assets/img/logos/uc.png
+    logo_url: https://www.artsci.uc.edu/departments/physics.html
+
+education:
+  - title: PhD in Mathematics
+    place: Uppsala University
+    logo: /assets/img/logos/logo.png
+    logo_url: https://www.uu.se/en/department/mathematics
+    location: Uppsala, Sweden
+    start: 2018
+    end: 2023
+    details: "Thesis: [*Quivers, superconformal field theories and higher symmetries*](http://www.diva-portal.org/smash/record.jsf?pid=diva2:1748018)<br>Supervisor: Michele Del Zotto"
+
+  - title: MSc in Particles, Strings and Cosmology
+    place: Durham University
+    logo: /assets/img/logos/durham.png
+    logo_url: https://www.durham.ac.uk/departments/academic/mathematical-sciences/
+    location: Durham, United Kingdom
+    start: 2017
+    end: 2018
+    details: "Dissertation: [*Twistor theory: a geometric approach to integrability*](/assets/files/msc-dissertation.pdf)<br>Supervisor: Richard S. Ward"
+
+  - title: MA in Mathematics
+    place: Girton College, University of Cambridge
+    logo: /assets/img/logos/cambridge.svg
+    logo_url: https://www.maths.cam.ac.uk/
+    logo_name: University of Cambridge
+    logo_secondary: /assets/img/logos/girton.png
+    logo_secondary_url: https://www.girton.cam.ac.uk/
+    logo_secondary_name: Girton College
+    location: Cambridge, United Kingdom
+    start: 2014
+    end: 2017
+
+awards:
+  - title: Knut and Alice Wallenberg postdoctoral scholarship 
+    place: Knut och Alice Wallenbergs Stiftelse 
+    end: 2023
+
+  - title: Peter Rowe Postgraduate Memorial Prize
+    place: Durham University
+    end: 2018
+
+  - title: Winton MSc Prize in Physics
+    place: Durham University
+    end: 2018

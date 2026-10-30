@@ -1,0 +1,55 @@
+# ---------------------------------------------------------------
+#  Site settings — edit these first.
+#  Restart `jekyll serve` after changing this file.
+# ---------------------------------------------------------------
+
+title: Robert Moscrop
+description: Robert Moscrop — postdoctoral researcher in mathematical physics at Uppsala University.
+
+# For a user site (username.github.io) leave baseurl empty.
+# For a project site (username.github.io/repo) set baseurl: "/repo".
+url: "https://username.github.io"
+baseurl: ""
+
+# Shown in the profile card on the home page.
+author:
+  name: Robert Moscrop
+  position: Postdoctoral Researcher
+  department: Department of Mathematics
+  institution: Uppsala University
+  office: "Room 1234, Building Name"
+  email: your.name@university.edu
+  photo: /assets/img/profile.png
+  photo_light:       # optional front picture for the light theme — leave blank to use photo
+  photo_back: /assets/img/profile-back.webp   # picture on the back of the photo (click to flip) — leave blank for a placeholder
+  photo_back_alt: A black and white cat asleep on a grey blanket
+  cv_pdf:            # e.g. /assets/files/cv.pdf — leave blank to hide the download button
+
+# Profile links. Delete any you don't use; add more in the same form.
+links:
+  - name: INSPIRE
+    url: https://inspirehep.net/authors/1912084
+  - name: ORCID
+    url: https://orcid.org/0000-0001-8799-7824
+
+# Load MathJax so you can write $x^2$ and $$\int f$$ in any page.
+mathjax: true
+
+# ---------------------------------------------------------------
+#  Build settings — you normally don't need to touch these.
+# ---------------------------------------------------------------
+markdown: kramdown
+kramdown:
+  input: GFM
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: page
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

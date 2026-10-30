@@ -1,0 +1,987 @@
+/* ---------------------------------------------------------------
+   Colours — change --accent to re-theme the whole site.
+   The light palette is below; the dark palette (the default, set by
+   data-theme="dark" in _layouts/default.html) follows it.
+   --------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  --bg: #e8e9eb;
+  --surface: #f2f3f4;
+  --card: #f2f3f4;
+  --card-shadow: 0 1px 2px rgba(29, 31, 35, 0.06), 0 4px 14px rgba(29, 31, 35, 0.06);
+  --text: #1d1f23;
+  --muted: #565d68;
+  --rule: #d3d6db;
+  /* Cherry blossom pink (test). The original blue was:
+     --accent: #1f4e79;  --accent-soft: #d9e2ec;  --pattern: #2c6cb0;  --pattern-opacity: 0.45; */
+  --accent: #a8325f;        /* deep blossom pink, dark enough for link text on the grey page */
+  --accent-soft: #f4d6e1;   /* pale blossom pink for tag and badge backgrounds */
+  /* Background triangulation: a lighter pink than --accent, so it reads as decoration */
+  --pattern: #e0759b;
+  --pattern-opacity: 0.6;
+  /* Cherry blossom petals in the top-left corner (_includes/blossoms.html) */
+  --blossom-petal: #f5b8cb;
+  --blossom-edge: #df87a7;
+  --blossom-opacity: 1;
+
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --measure: 46rem;
+  --wide: 64rem;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #15171b;
+  --surface: #1c1f24;
+  --card: #21252b;
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 18px rgba(0, 0, 0, 0.25);
+  --text: #e6e4df;
+  --muted: #9aa1ac;
+  --rule: #2e3239;
+  --accent: #8fb8e3;
+  --accent-soft: #233041;
+  --pattern: #8fb8e3;
+  --pattern-opacity: 0.28;
+  /* Petals by night: autumnal browns, dark enough not to glare on the dark page */
+  --blossom-petal: #643f23;
+  --blossom-edge: #855732;
+  --blossom-opacity: 1;
+}
+
+/* ---------------------------------------------------------------
+   Base
+   --------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main { flex: 1; }
+
+.container {
+  width: 100%;
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Gap between the navigation bar and the page content (about half a line). */
+main.container { padding-top: 1rem; padding-bottom: 4rem; }
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 2.2em 0 0.6em;
+}
+h1 { font-size: 2.25rem; margin-top: 0; letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.15rem; }
+
+p, ul, ol { margin: 0 0 1em; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+img { max-width: 100%; height: auto; }
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+/* Decorative triangulation in the bottom-right corner, tinted with --pattern.
+   The SVG is used as a mask so its colour follows the theme. */
+.bg-pattern {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  width: min(46vw, 620px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background-color: var(--pattern);
+  opacity: var(--pattern-opacity);
+  -webkit-mask: url("../img/triangulation.svg") no-repeat right bottom / 100% 100%;
+  mask: url("../img/triangulation.svg") no-repeat right bottom / 100% 100%;
+}
+/* Phones: larger relative to the screen, so a little fainter. */
+@media (max-width: 760px) {
+  .bg-pattern { width: 75vw; opacity: calc(var(--pattern-opacity) * 0.65); }
+}
+
+/* Cherry blossom petals scattered from the top-left corner, behind the page. The mask fades
+   them out with distance from the corner; its ellipse is wider than tall, like the scatter, and
+   adds to the fade drawn into the petals themselves. */
+.bg-blossoms {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: min(62vw, 900px);
+  height: auto;
+  pointer-events: none;
+  opacity: var(--blossom-opacity);
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 0 0, #000 8%, rgba(0, 0, 0, 0.45) 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 75% at 0 0, #000 8%, rgba(0, 0, 0, 0.45) 45%, transparent 100%);
+}
+@media (max-width: 760px) {
+  .bg-blossoms { width: 110vw; opacity: calc(var(--blossom-opacity) * 0.6); }
+}
+/* Hidden with the petal button in the header (the script in default.html animates the change) */
+.petals-off .bg-blossoms { display: none; }
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  background: var(--surface);
+  padding: 0.5rem 0.75rem;
+  z-index: 10;
+}
+.skip-link:focus { left: 0.5rem; }
+
+/* ---------------------------------------------------------------
+   Header & footer
+   --------------------------------------------------------------- */
+.site-header {
+  border-bottom: 1px solid var(--rule);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+
+.site-title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Switching theme reveals the new one as a circle growing from the toggle button: the
+   script in default.html animates the clip, so the browser's default crossfade is off. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.theme-toggle,
+.petal-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.theme-toggle:hover,
+.petal-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle:focus-visible,
+.petal-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Petal on/off button, beside the theme button; filled in the accent colour while the petals are on */
+.petal-toggle { margin-left: -0.6rem; }
+.petal-toggle[aria-pressed="true"] { color: var(--accent); }
+.petal-toggle[aria-pressed="true"] svg { fill: currentColor; fill-opacity: 0.35; }
+
+/* Show the icon for the mode you'd switch to. */
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+
+.site-nav a {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover { color: var(--text); }
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* ---------------------------------------------------------------
+   Home page
+   --------------------------------------------------------------- */
+.home {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.profile { position: sticky; top: 2rem; }
+
+/* The photo is a two-sided card: clicking flips it to show the back. */
+.photo-flip {
+  display: block;
+  width: 100%;
+  max-width: 15rem;
+  aspect-ratio: 1;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  perspective: 900px;
+}
+.photo-flip:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.photo-flip-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.photo-flip.is-flipped .photo-flip-inner { transform: rotateY(180deg); }
+.photo-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.photo-back { transform: rotateY(180deg); }
+
+.profile-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Pictures that only appear in one theme (the default theme is dark). */
+.theme-light-only { display: none; }
+:root[data-theme="light"] .theme-light-only { display: block; }
+:root[data-theme="light"] .theme-dark-only { display: none; }
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  height: 100%;
+  border: 1.5px dashed var(--rule);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-flip-inner { transition: none; }
+}
+
+.profile-name { font-size: 1.6rem; margin: 0 0 0.35rem; }
+
+.profile-role {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+.profile-contact,
+.profile-links {
+  list-style: none;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.profile-contact li { margin-bottom: 0.5rem; overflow-wrap: anywhere; }
+.profile-contact .label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.profile-links a {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+.profile-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+.home-content { max-width: var(--measure); }
+.home-content > h2:first-child { margin-top: 0; }
+
+/* News list: "- **Mar 2026** — text" renders as a dated list */
+.news { list-style: none; padding: 0; }
+.news li {
+  position: relative;
+  padding: 0.55rem 0 0.55rem 7.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.news li:last-child { border-bottom: 0; }
+.news li > strong:first-child {
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------
+   Inner pages
+   --------------------------------------------------------------- */
+.page { max-width: var(--measure); }
+
+.page-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.page-header h1 { margin-bottom: 0.4rem; }
+.lede { color: var(--muted); margin: 0; }
+
+.section-title {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 3rem 0 1.25rem;
+}
+
+.button {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+}
+.button:hover { opacity: 0.9; }
+
+/* Timeline entries (education & experience) */
+.timeline { list-style: none; padding: 0; margin: 0; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.entry:last-child { border-bottom: 0; }
+
+.entry-dates {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding-top: 0.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.entry-title { font-size: 1.1rem; font-weight: 600; margin: 0; }
+
+/* Optional institution logo, shown on a white disc so it reads in both themes. */
+.entry-logos {
+  float: right;
+  position: relative;
+  margin: 0 0 0.5rem 1rem;
+  line-height: 0;
+}
+.entry-logo-link {
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+/* Second logo: tucked behind the first, slides out to the right on hover or focus.
+   The delay before hiding lets the pointer cross the gap to click it. */
+.entry-logo-secondary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(0) scale(0.85);
+  transition: transform 0.3s ease 0.35s, opacity 0.2s ease 0.35s;
+}
+/* Invisible bridge across the gap, so moving onto the second logo keeps it open. */
+.entry-logo-secondary::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  right: 100%;
+  width: 0.9rem;
+}
+.entry-logos:hover .entry-logo-secondary,
+.entry-logos:focus-within .entry-logo-secondary {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(calc(100% + 0.75rem)) scale(1);
+  transition-delay: 0s;
+}
+.entry-logo {
+  display: block;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  padding: 3px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--rule);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+/* Linked logos grow slightly and glow on hover or keyboard focus. */
+a.entry-logo-link:hover .entry-logo,
+a.entry-logo-link:focus-visible .entry-logo {
+  transform: scale(1.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft), 0 0 14px 2px var(--accent);
+}
+a.entry-logo-link:focus-visible { outline: none; }
+@media (prefers-reduced-motion: reduce) {
+  .entry-logo { transition: none; }
+  .entry-logo-secondary { transition: opacity 0.2s ease 0.35s; }
+  .entry-logos:hover .entry-logo-secondary,
+  .entry-logos:focus-within .entry-logo-secondary { transition-delay: 0s; }
+}
+/* On narrow screens there is no room on the right, so the second logo pops out to the left. */
+@media (max-width: 760px) {
+  .entry-logos:hover .entry-logo-secondary,
+  .entry-logos:focus-within .entry-logo-secondary {
+    transform: translateX(calc(-100% - 0.75rem)) scale(1);
+  }
+  .entry-logo-secondary::before { right: auto; left: 100%; }
+}
+.entry-body::after { content: ""; display: block; clear: both; }
+.entry-place { color: var(--muted); margin: 0.1rem 0 0; }
+.entry-location {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 1rem;
+  margin: 0;
+}
+.entry-details { margin-top: 0.5rem; font-size: 1rem; }
+.entry-details p:last-child,
+.entry-details ul:last-child { margin-bottom: 0; }
+
+.page-header + h2 { margin-top: 0; }
+h2 + section .section-title { margin-top: 1.25rem; }
+
+/* Research interest cards */
+.interests {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.interest {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.interest::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.85;
+}
+/* Closed cards lift slightly on hover; open cards stay still while being read. */
+.interest:not([open]):hover { transform: translateY(-2px); }
+.interest:has(> .interest-summary:hover) { border-color: var(--accent); }
+
+/* The title row toggles the card open and closed. */
+.interest-summary {
+  position: relative;
+  display: block;
+  list-style: none;
+  padding: 1.15rem 3.25rem 1.1rem 1.35rem;
+  cursor: pointer;
+}
+.interest-summary::-webkit-details-marker { display: none; }
+.interest-summary::after {
+  content: "";
+  position: absolute;
+  right: 1.4rem;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: -0.4rem;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.interest[open] > .interest-summary::after { transform: rotate(-135deg); margin-top: -0.1rem; }
+.interest-summary:hover::after { border-color: var(--accent); }
+.interest-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 10px; }
+
+.interest-title {
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--text);
+}
+
+/* Opened card: description on the left, a square picture on the right. */
+.interest-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 9.5rem;
+  gap: 1.25rem;
+  align-items: start;
+  padding: 0 1.35rem 1.3rem;
+}
+.interest-body { font-size: 1rem; line-height: 1.6; color: var(--text); }
+.interest-body p:last-child { margin-bottom: 0; }
+
+/* "Relevant papers" list under the description */
+.interest-papers-title {
+  margin: 1rem 0 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.interest-papers { margin: 0; padding-left: 1.2rem; font-size: 0.95rem; line-height: 1.5; }
+.interest-papers li { margin-bottom: 0.3rem; }
+.interest-papers li:last-child { margin-bottom: 0; }
+.interest-papers li::marker { color: var(--accent); }
+.interest-paper-meta {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.interest-figure {
+  margin: 0;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.interest-figure img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.interest-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  height: 100%;
+  border: 1.5px dashed var(--rule);
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Wide diagrams sit full width under the description instead of in the square. */
+.interest-content.has-diagram { grid-template-columns: minmax(0, 1fr); }
+.has-diagram .interest-figure { aspect-ratio: auto; border-radius: 0; }
+.has-diagram .interest-figure img { height: auto; object-fit: contain; }
+/* Diagrams are drawn dark on transparent; flip them to light in the dark theme, keeping hues. */
+:root[data-theme="dark"] .has-diagram .interest-figure img { filter: invert(1) hue-rotate(180deg); }
+
+/* TEST: on wide screens an open card shows its diagram in a box beside the card, in the space
+   right of the text column. Narrower screens keep the diagram inside the card. */
+@media (min-width: 1100px) {
+  .interest:has(> .has-diagram) {
+    overflow: visible;
+    /* The top accent bar as an inset shadow, so it follows the rounded corners without clipping */
+    box-shadow: inset 0 3px 0 color-mix(in srgb, var(--accent) 85%, transparent), var(--card-shadow);
+  }
+  .interest:has(> .has-diagram)::before { display: none; }
+  .has-diagram .interest-figure {
+    position: absolute;
+    top: -1px;
+    left: calc(100% + 1.5rem);
+    /* The gap between the text column and the window edge, less some breathing room */
+    width: min(28rem, calc(50vw - var(--measure) + var(--wide) / 2 - 5.25rem));
+    padding: 0.85rem;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    animation: figure-aside-in 0.25s ease;
+  }
+}
+@keyframes figure-aside-in {
+  from { opacity: 0; transform: translateX(-0.75rem); }
+}
+
+@media (max-width: 760px) {
+  .interest-content { grid-template-columns: 1fr; }
+  .interest-figure { width: 100%; max-width: 14rem; }
+  .has-diagram .interest-figure { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interest, .interest-summary::after { transition: none; }
+  .interest:not([open]):hover { transform: none; }
+  .has-diagram .interest-figure { animation: none; }
+  .publication:target { animation: none; }
+}
+
+/* Publications */
+.publications {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: pub;
+}
+
+.publication {
+  position: relative;
+  padding: 1rem 0 1rem 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  counter-increment: pub;
+}
+.publication:last-child { border-bottom: 0; }
+/* A publication linked to from a research card: leave room above it and flash it briefly. */
+.publication { scroll-margin-top: 1.5rem; }
+.publication:target { animation: pub-flash 1.6s ease; }
+@keyframes pub-flash {
+  from { background: var(--accent-soft); }
+}
+.publication::before {
+  content: "[" counter(pub) "]";
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.pub-head > span { display: block; }
+.pub-title { font-weight: 600; line-height: 1.4; }
+.pub-authors { font-size: 1rem; margin-top: 0.2rem !important; }
+/* Your own name in author lists: bold and in the accent colour. */
+.pub-authors strong { font-weight: 600; color: var(--accent); }
+.pub-venue { font-size: 1rem; color: var(--muted); }
+
+.pub-status {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.08rem 0.5rem;
+  margin-left: 0.35rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  vertical-align: 0.1em;
+}
+
+.pub-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.45rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.pub-links a {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 0.12rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration: none;
+}
+.pub-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Collapsible publications: the title, authors and venue toggle the abstract. */
+.pub-summary {
+  position: relative;
+  display: block;
+  list-style: none;
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+.pub-summary::-webkit-details-marker { display: none; }
+.pub-summary::after {
+  content: "";
+  position: absolute;
+  right: 0.6rem;
+  top: 0.35rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.pub-details[open] > .pub-summary::after { transform: rotate(-135deg); top: 0.6rem; }
+.pub-summary:hover::after { border-color: var(--accent); }
+.pub-summary:hover .pub-title { color: var(--accent); }
+.pub-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+.pub-abstract {
+  margin: 0.7rem 2.25rem 0.1rem 0;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  border-left: 3px solid var(--accent-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.pub-abstract p { margin: 0 0 0.6rem; }
+.pub-abstract > p:first-child::before {
+  content: "Abstract.";
+  margin-right: 0.35em;
+  font-weight: 700;
+  color: var(--accent);
+}
+.pub-abstract > :last-child { margin-bottom: 0; }
+.pub-abstract ul { margin: 0 0 0.6rem; padding-left: 1.25rem; }
+@media (max-width: 600px) {
+  .pub-abstract { margin-right: 0; }
+}
+
+/* TEST: a preview of the paper's first page. On wide screens it sits in a box beside the open
+   entry, like the research diagrams; narrower screens show it small under the abstract. */
+.pub-preview { margin: 0.8rem 0 0.1rem; max-width: 12rem; }
+.pub-preview a { display: block; }
+.pub-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;
+}
+.pub-preview a:hover img { border-color: var(--accent); }
+/* A white page glares on the dark theme, so dim it a little */
+:root[data-theme="dark"] .pub-preview img { filter: brightness(0.85); }
+@media (min-width: 1100px) {
+  .pub-preview {
+    position: absolute;
+    top: 0.6rem;
+    left: calc(100% + 1.5rem);
+    width: min(20rem, calc(50vw - var(--measure) + var(--wide) / 2 - 5.25rem));
+    max-width: none;
+    margin: 0;
+    padding: 0.85rem;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    animation: figure-aside-in 0.25s ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pub-summary::after { transition: none; }
+  .pub-preview { animation: none; }
+}
+
+/* Teaching cards */
+.courses { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+
+.course {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+}
+
+.course-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+}
+.course-title { font-size: 1.1rem; font-weight: 600; margin: 0; }
+.course-code {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.course-meta {
+  font-family: var(--sans);
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin: 0.35rem 0 0;
+}
+
+.tags { list-style: none; padding: 0; margin: 0.6rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tags li {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.course-desc { font-size: 1rem; margin: 0.7rem 0 0; }
+.course-desc p:last-child { margin-bottom: 0; }
+
+/* Collapsible cards: the whole card header toggles the description. */
+.course-details { margin: -1.1rem -1.25rem; }
+.course-summary {
+  position: relative;
+  display: block;
+  list-style: none;
+  padding: 1.1rem 3.25rem 1.1rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.course-summary::-webkit-details-marker { display: none; }
+.course-summary::after {
+  content: "";
+  position: absolute;
+  right: 1.35rem;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: -0.4rem;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.course-details[open] > .course-summary::after { transform: rotate(-135deg); margin-top: -0.1rem; }
+.course-summary:hover::after { border-color: var(--accent); }
+.course-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.course:has(> .course-details > .course-summary:hover) { border-color: var(--accent); }
+.course-details > .course-desc { margin: 0; padding: 0 1.25rem 1.1rem; }
+@media (prefers-reduced-motion: reduce) {
+  .course-summary::after { transition: none; }
+}
+
+/* ---------------------------------------------------------------
+   Small screens
+   --------------------------------------------------------------- */
+@media (max-width: 760px) {
+  body { font-size: 1.0625rem; }
+  h1 { font-size: 1.85rem; }
+
+  /* Name and toggle share the top row; the nav gets its own row below. */
+  .header-inner { align-items: center; }
+  .header-right { display: contents; }
+  .site-title { flex: 1; }
+  .site-nav { order: 2; flex-basis: 100%; }
+  .site-nav ul { gap: 0.25rem 1.1rem; }
+  .site-nav a { white-space: nowrap; }
+
+  .home { grid-template-columns: 1fr; gap: 2rem; }
+  .profile { position: static; }
+  .photo-flip { max-width: 9rem; }
+
+  .entry { grid-template-columns: 1fr; gap: 0.25rem; }
+  .news li { padding-left: 0; }
+  .news li > strong:first-child { position: static; display: block; }
+}

@@ -1,0 +1,68 @@
+---
+layout: default
+---
+{%- assign a = site.author -%}
+<div class="home">
+  <aside class="profile">
+    {%- comment %} Clicking the photo flips it over to show author.photo_back (a placeholder until set). {% endcomment %}
+    <button class="photo-flip" type="button" aria-pressed="false" aria-label="Flip photo to see the other side" title="Click to flip">
+      <span class="photo-flip-inner">
+        <span class="photo-face photo-front">
+          {%- if a.photo_light %}
+          {%- comment %} Separate front picture for the light theme; CSS shows the one matching the theme. {% endcomment %}
+          <img class="profile-photo theme-dark-only" src="{{ a.photo | relative_url }}" alt="Photo of {{ a.name }}" width="220" height="220">
+          <img class="profile-photo theme-light-only" src="{{ a.photo_light | relative_url }}" alt="Photo of {{ a.name }}" width="220" height="220">
+          {%- else %}
+          <img class="profile-photo" src="{{ a.photo | relative_url }}" alt="Photo of {{ a.name }}" width="220" height="220">
+          {%- endif %}
+        </span>
+        <span class="photo-face photo-back">
+          {%- if a.photo_back %}
+          <img class="profile-photo" src="{{ a.photo_back | relative_url }}" alt="{{ a.photo_back_alt | default: 'Second photo' }}" width="220" height="220">
+          {%- else %}
+          <span class="photo-placeholder">
+            <svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="10" r="1.8" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span>Picture</span>
+          </span>
+          {%- endif %}
+        </span>
+      </span>
+    </button>
+    <h1 class="profile-name">{{ a.name }}</h1>
+    <p class="profile-role">
+      {{ a.position }}
+      {%- if a.department %}<br>{{ a.department }}{% endif %}
+      {%- if a.institution %}<br>{{ a.institution }}{% endif %}
+    </p>
+    <ul class="profile-contact">
+      {%- if a.email %}
+      <li><span class="label">Email</span> <a href="mailto:{{ a.email }}">{{ a.email }}</a></li>
+      {%- endif %}
+      {%- if a.office %}
+      <li><span class="label">Office</span> {{ a.office }}</li>
+      {%- endif %}
+    </ul>
+    {%- if site.links.size > 0 %}
+    <ul class="profile-links">
+      {%- for link in site.links %}
+      <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </aside>
+
+  <div class="home-content">
+    {{ content }}
+  </div>
+</div>
+<script>
+  (function () {
+    var flip = document.querySelector('.photo-flip');
+    if (!flip) return;
+    flip.addEventListener('click', function () {
+      var flipped = flip.classList.toggle('is-flipped');
+      flip.setAttribute('aria-pressed', flipped);
+      flip.setAttribute('aria-label', flipped ? 'Flip photo back' : 'Flip photo to see the other side');
+    });
+  })();
+</script>

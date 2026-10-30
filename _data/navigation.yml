@@ -1,0 +1,9 @@
+# Items in the top navigation bar, in order.
+- title: Home
+  url: /
+- title: Research
+  url: /research/
+- title: Education & Experience
+  url: /cv/
+- title: Teaching
+  url: /teaching/
