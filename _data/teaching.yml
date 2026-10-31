@@ -8,6 +8,19 @@
 #   terms        – list of terms, shown as tags
 #   url          – optional link to a course page or notes (a full URL, or a path like /teaching/linalg/)
 #   description  – optional Markdown
+#   notes        – optional path to lecture notes, e.g. /assets/files/course/lecture-notes.pdf
+#   sheets       – optional list of problem sheets, each with a title and a file path
+# Notes and sheets show inside the opened card, each as a download link once its file is in
+# the site; until then it shows greyed out as "coming soon".
+#   image        – TEST, optional photo path, shown in a box beside the opened card on wide
+#                  screens; a placeholder shows until the file is in the site
+#   image_alt    – description of the photo, for screen readers
+#   diagram      – true if the image is a diagram drawn dark on transparent; the dark theme
+#                  then flips it to light, like the research diagrams
+#   syllabus     – TEST, optional list of topics (each a topic and its contents), shown in the
+#                  box beside the opened card instead of the image. Set it to "placeholder" for
+#                  a "coming soon" box. To reuse another course's list, mark that list with
+#                  &name (syllabus: &name) and write syllabus: *name here.
 #
 # Add, rename or remove sections freely.
 
@@ -17,7 +30,37 @@
       role: Lecturer
       institution: Uppsala University
       terms: [Autumn 2026]
-      description: Lectured the course (40 hours) to an audience of engineering students, and also tutored a group of approximately 20 students.
+      description: A mathematical methods course taught to second and third year engineering track students.
+      # TEST: the syllabus replaces the Fourier series plot in the box beside the card. To bring
+      # the plot back, delete the syllabus and restore these three lines:
+      #   image: /assets/img/teaching/transform-methods.png
+      #   image_alt: "Partial Fourier sums S₃ and S₁₂ of a sawtooth wave f(t), overshooting at its jumps"
+      #   diagram: true
+      # Taken from the first page of the lecture notes.
+      syllabus: &transform-methods-syllabus
+        - topic: Fourier series
+          contents: Periodic functions, complex and trigonometric Fourier series, even and odd functions, half-range series, basic L² theory and Parseval's theorem, pointwise convergence results.
+        - topic: Fourier transform
+          contents: Integral definition, scaling and shifting properties, convolution theorem, statement of the Fourier inversion theorem and its consequences, Plancherel's theorem.
+        - topic: Laplace transform
+          contents: Integral definition and motivation, transformation properties, initial and final value theorems, application to initial value problems, LTI systems.
+        - topic: Separable PDEs
+          contents: The separation of variables ansatz, the heat equation, the wave equation, inhomogeneous boundary conditions.
+        - topic: Z-transform
+          contents: Series definition, discrete convolution theorem, application to difference equations, discrete LTI systems.
+      # Put the PDFs at these paths and they switch on.
+      notes: /assets/files/transform-methods/lecture-notes.pdf
+      sheets:
+        - title: Problem sheet 1
+          file: /assets/files/transform-methods/problem-sheet-1.pdf
+        - title: Problem sheet 2
+          file: /assets/files/transform-methods/problem-sheet-2.pdf
+        - title: Problem sheet 3
+          file: /assets/files/transform-methods/problem-sheet-3.pdf
+        - title: Problem sheet 4
+          file: /assets/files/transform-methods/problem-sheet-4.pdf
+        - title: Problem sheet 5
+          file: /assets/files/transform-methods/problem-sheet-5.pdf
 
 - section: Teaching assistant
   courses:
@@ -26,39 +69,88 @@
       institution: Uppsala University
       terms: [Spring 2023]
       description: Tutored a group of 25 physics students. Topics included conic sections, vector operations and Stokes' theorem.
+      syllabus: &multivariable-calculus-syllabus
+      - topic: Geometry
+        contents: Coordinate systems, parameterisations of curves and surfaces, level curves, arc length, scalar and vector valued functions.
+      - topic: Differentiation in Rⁿ
+        contents: Partial derivatives, directional derivatives, chain rule, the Jacobian, Taylor's formula, local and global optimisation problems, Lagrange multipliers.
+      - topic: Integration in Rⁿ
+        contents: Multiple integrals, change of variables, volumes and centres of mass, line and surface integrals of vector fields, divergence and curl, Green's theorem, Stokes' theorem, Gauss's theorem.
+      - topic: Partial differential equations
+        contents: Boundary value problems and PDEs, Laplace equation, wave equation, heat equation, examples from electromagnetism and fluid mechanics.
 
     - title: Linear algebra II
       role: Tutor
       institution: Uppsala University
       terms: [Autumn 2021, Autumn 2022]
       description: Tutored two groups of 20 engineering and physics students in 2022, and a group of 25 engineering and computing students in 2021. The course covered vector spaces, linear maps and basic geometry.
+      syllabus: 
+      - topic: Linear spaces
+        contents: Vector subspaces, linear span, linear dependence, bases, dimension, change of basis.
+      - topic: Linear transformations
+        contents: Matrices, change of basis formula, composition and inverses, rank-nullity theorem.
+      - topic: Euclidean spaces
+        contents: Inner products, the Cauchy-Schwarz inequality, orthogonality, isometries, orthonormal bases, Gram-Schmidt orthogonalisation.
+      - topic: Spectral theory
+        contents: Eigenvalues, eigenvectors, characteristic polynomials, diagonalisability, the spectral theorem, second degree surfaces, application to systems of linear ODEs.
 
     - title: Transform methods
       role: Tutor
       institution: Uppsala University
-      terms: [Autumn 2021, Autumn 2022]
+      terms: [Autumn 2021, Autumn 2022, Autumn 2026]
       description: Tutored two groups of approximately 25 engineering students. Topics included Fourier series, Laplace transforms and separable PDEs.
+      syllabus: *transform-methods-syllabus  
 
     - title: Complex analysis
       role: Tutor
       institution: Uppsala University
       terms: [Spring 2021]
       description: Tutored a group of 10 dual mathematics and teaching students. Topics included complex derivatives, contour integrals and the standard theorems of complex analysis.
+      syllabus: 
+      - topic: Basics
+        contents: Complex numbers, functions of a complex variable, limits, continuity and differentiability, Cauchy-Riemann equations, analytic and harmonic functions, conformal mappings.
+      - topic: Singularities
+        contents: Zeroes and poles of complex functions, isolated and essential singularities, power series, Taylor and Laurent series.
+      - topic: Complex integration
+        contents: Contour integrals, Cauchy's integral formula, the residue theorem, application to Fourier integrals, Poisson's integral formula.
+      - topic: Theorems in complex analysis
+        contents: Maximum principle for harmonic functions, the maximum modulus principle, the argument principle, Rouché's theorem.
 
     - title: Statistics for biologists
       role: Tutor
       institution: Uppsala University
       terms: [Spring 2021]
       description: Tutored a group of 30 biology students over 15 sessions, including 5 data labs. An introduction to statistical tests, distributions and programming in R.
+      syllabus: 
+      - topic: Statistical notions
+        contents: Population, samples, natural variation, replicated experiments, mean and variance.
+      - topic: Probability distributions
+        contents: Discrete distributions, cumulative distribution, continuous random variables, probability density functions, examples including the binomial, normal, Poisson  and χ² distributions.
+      - topic: Hypothesis testing
+        contents: Null and alternative hypotheses, test statistics, p-value, non-parametric tests, Student's t-test, χ² test, Wilcoxon's rank sum test, sign test.
+      - topic: Programming in R
+        contents: Syntax, plotting, distributions, correllation and regression.
 
     - title: Linear algebra I
       role: Tutor
       institution: Durham University
       terms: [Autumn 2019]
       description: Tutored three groups of 15 physics and mathematics students. A first-year introduction to vectors, linear maps and groups.
+      syllabus: 
+      - topic: Vectors and matrices
+        contents: Vectors in Rⁿ, matrices, change of basis formulae, determinants, inverse maps and matrices.
+      - topic: Vector spaces
+        contents: Axioms of real vector spaces, linear maps between vector spaces, representation as matrices, vector space morphisms, examples including functions.
+      - topic: Diagonalisability
+        contents: Eigenspaces, eigenvalues and eigenvectors, diagonlisation, Jordan normal form
+      - topic: Inner product spaces
+        contents: Quadratic forms, Hermitian forms, the Cauchy-Schwarz inequality.
+      - topic: Intro to group theory
+        contents: Binary operations on sets, groups and the group axioms, cosets and quotient groups, Lagrange's theorem, examples involving symmetry groups and matrix groups.
 
     - title: Multi-variable calculus
       role: Tutor
       institution: Durham University
       terms: [Spring 2019]
       description: Tutored two groups of 20 mathematics students. The course focused on vector calculus and PDEs.
+      syllabus: *multivariable-calculus-syllabus   

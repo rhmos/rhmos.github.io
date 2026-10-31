@@ -2,6 +2,7 @@
 title: Research
 permalink: /research/
 lede: Research interests and publications.
+collapse_all: true   # TEST: floating "collapse all cards" button (_includes/collapse-all.html)
 
 # Each interest becomes a collapsible card: only the title shows until it is clicked.
 # `description` is Markdown, so maths ($...$) and links work.
@@ -136,7 +137,7 @@ An up-to-date list, with citations, is on [INSPIRE](https://inspirehep.net/autho
         <div class="pub-abstract">{{ pub.abstract | markdownify }}</div>
         {%- if pub.preview %}
         <figure class="pub-preview">
-          <a href="{% if pub.arxiv %}https://arxiv.org/pdf/{{ pub.arxiv }}{% else %}{{ pub.preview | relative_url }}{% endif %}" aria-label="Read the paper">
+          <a href="{% if pub.arxiv %}https://arxiv.org/pdf/{{ pub.arxiv }}{% elsif pub.pdf %}{{ pub.pdf | relative_url }}{% elsif pub.url %}{{ pub.url }}{% else %}{{ pub.preview | relative_url }}{% endif %}" aria-label="Read the paper">
             <img src="{{ pub.preview | relative_url }}" alt="First page of the paper" loading="lazy">
           </a>
         </figure>

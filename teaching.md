@@ -2,6 +2,7 @@
 title: Teaching
 permalink: /teaching/
 lede: Courses I have taught, most recent first.
+collapse_all: true   # TEST: floating "collapse all cards" button (_includes/collapse-all.html)
 ---
 
 {%- comment -%}
@@ -37,7 +38,61 @@ leading tutorial groups for students of mathematics, physics, engineering, compu
       {%- if course.description %}
       <details class="course-details">
         <summary class="course-summary">{{ course_summary }}</summary>
-        <div class="course-desc">{{ course.description | markdownify }}</div>
+        <div class="course-body">
+          <div class="course-desc">{{ course.description | markdownify }}</div>
+          {%- if course.notes or course.sheets %}
+          {%- comment %} Each file links only once it is in the site; until then it shows as coming soon. {% endcomment %}
+          <div class="course-materials">
+            {%- if course.notes %}
+            {%- assign found = site.static_files | where: "path", course.notes %}
+            {%- if found.size > 0 %}
+            <a class="course-notes" href="{{ course.notes | relative_url }}" download>{% include download-icon.html %}Lecture notes</a>
+            {%- else %}
+            <span class="course-notes is-pending">{% include download-icon.html %}Lecture notes <span class="pending-note">coming soon</span></span>
+            {%- endif %}
+            {%- endif %}
+            {%- if course.sheets %}
+            <h4 class="course-materials-title">Problem sheets</h4>
+            <ul class="course-sheets">
+              {%- for sheet in course.sheets %}
+              {%- assign found = site.static_files | where: "path", sheet.file %}
+              {%- if found.size > 0 %}
+              <li><a href="{{ sheet.file | relative_url }}" download>{% include download-icon.html %}{{ sheet.title }}</a></li>
+              {%- else %}
+              <li><span class="is-pending">{% include download-icon.html %}{{ sheet.title }} <span class="pending-note">coming soon</span></span></li>
+              {%- endif %}
+              {%- endfor %}
+            </ul>
+            {%- endif %}
+          </div>
+          {%- endif %}
+        </div>
+        {%- if course.syllabus %}
+        <div class="course-aside course-syllabus">
+          <h4 class="course-materials-title">Syllabus</h4>
+          {%- if course.syllabus.first %}
+          <ol>
+            {%- for item in course.syllabus %}
+            <li><strong>{{ item.topic }}.</strong> {{ item.contents }}</li>
+            {%- endfor %}
+          </ol>
+          {%- else %}
+          <div class="course-placeholder syllabus-placeholder">Syllabus coming soon</div>
+          {%- endif %}
+        </div>
+        {%- elsif course.image %}
+        {%- assign found = site.static_files | where: "path", course.image %}
+        <figure class="course-aside course-figure{% if course.diagram %} is-diagram{% endif %}">
+          {%- if found.size > 0 %}
+          <img src="{{ course.image | relative_url }}" alt="{{ course.image_alt }}" loading="lazy">
+          {%- else %}
+          <div class="course-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5.5-5 4 3.5 3-2.5L21 18"/></svg>
+            Photo coming soon
+          </div>
+          {%- endif %}
+        </figure>
+        {%- endif %}
       </details>
       {%- else %}
       {{ course_summary }}

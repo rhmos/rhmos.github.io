@@ -229,6 +229,7 @@
       venue: PhD thesis, Uppsala University
       year: 2023
       url: https://inspirehep.net/literature/2668697
+      preview: /assets/img/papers/phd-thesis.png
       abstract: |
         Quantum field theory (QFT) currently provides our best description of the natural world.
         Over the past century, it has been able to accurately reproduce many experimental
@@ -256,3 +257,18 @@
       venue: MSc dissertation, University of Durham
       year: 2018
       pdf: /assets/files/msc-dissertation.pdf
+      preview: /assets/img/papers/msc-dissertation.png
+      # TEST: abstract drafted from the dissertation's introduction; adjust freely
+      abstract: |
+        Twistor theory, introduced by Penrose in 1967 as a route towards quantum gravity, recasts
+        problems about spacetime as problems in complex geometry. Although it has not yet
+        delivered a theory of quantum gravity, it has had a lasting impact on the study of
+        integrable systems, instantons and scattering amplitudes. In this dissertation we review
+        the twistor approach to integrability. We first introduce the geometric background
+        needed, including fibre bundles, spinors and sheaf cohomology, and use it to construct
+        twistor space and the twistor correspondence. We then apply these tools to the zero rest
+        mass equations, through the Penrose transform, and to the anti-self-dual Yang–Mills
+        equations, through the Penrose–Ward correspondence, with applications to instantons and
+        symmetry reductions. Finally, we discuss the difficulties in extending twistor theory to
+        curved spacetimes, describing ambitwistors and the twistor theory of anti-self-dual
+        spacetimes.

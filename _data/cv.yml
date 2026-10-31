@@ -22,7 +22,7 @@ experience:
     start: 2026
     logo: /assets/img/logos/logo.png
     logo_url: https://www.uu.se/en/department/mathematics
-    details: blah.
+    details: 
 
   - title: Postdoctoral Fellow
     place: Center for Mathematical Sciences and Applications, Harvard University
@@ -35,7 +35,7 @@ experience:
     logo_secondary: /assets/img/logos/cmsa.png
     logo_secondary_url: https://cmsa.fas.harvard.edu/
     logo_secondary_name: Center for Mathematical Sciences and Applications
-    details: blah blah.
+    details: 
 
   - title: Postdoctoral Researcher
     place: Department of Physics, University of Cincinnati

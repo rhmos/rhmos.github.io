@@ -4,7 +4,7 @@ A small, plugin-free Jekyll site for GitHub Pages with four pages:
 
 | Page | Edit content in |
 |---|---|
-| Home (`/`) | `index.md` (about, research interests, news) and the `author` / `links` block in `_config.yml` |
+| Home (`/`) | `index.md` (about, research interests) and the `author` / `links` block in `_config.yml` |
 | Research (`/research/`) | interests text in `research.md`, publications in `_data/publications.yml` |
 | Education & Experience (`/cv/`) | `_data/cv.yml` |
 | Teaching (`/teaching/`) | intro text in `teaching.md`, courses in `_data/teaching.yml` |
@@ -17,6 +17,15 @@ A small, plugin-free Jekyll site for GitHub Pages with four pages:
 - **Colours and fonts:** variables at the top of `assets/css/style.css`. Changing `--accent` re-themes the site. Dark mode follows the visitor's system setting.
 - **Maths:** MathJax is on (`mathjax: true`), so `$x^2$` and `$$ \int f $$` work in any Markdown page.
 - **Navigation:** `_data/navigation.yml`.
+
+## Publishing on GitHub Pages
+
+1. Create a repository named `<username>.github.io` (for a personal site at `https://<username>.github.io`).
+2. Push these files to the `main` branch.
+3. In the repository, go to **Settings → Pages**, choose **Deploy from a branch**, branch `main`, folder `/ (root)`.
+4. Set `url: "https://<username>.github.io"` in `_config.yml`.
+
+If you instead use a project repository (site at `https://<username>.github.io/<repo>`), also set `baseurl: "/<repo>"`.
 
 ## Previewing locally
 

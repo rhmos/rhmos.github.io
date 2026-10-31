@@ -10,3 +10,6 @@ layout: default
   </header>
   {{ content }}
 </article>
+{%- if page.collapse_all %}
+{% include collapse-all.html %}
+{%- endif %}
