@@ -8,7 +8,7 @@ description: Robert Moscrop — postdoctoral researcher in mathematical physics 
 
 # For a user site (username.github.io) leave baseurl empty.
 # For a project site (username.github.io/repo) set baseurl: "/repo".
-url: "https://username.github.io"
+url: "https://rhmos.github.io"
 baseurl: ""
 
 # Shown in the profile card on the home page.
