@@ -999,6 +999,66 @@ a.course-notes:hover { background: transparent; color: var(--accent); }
 .course-sheets a { text-decoration: none; }
 .course-sheets a:hover { text-decoration: underline; }
 .course-sheets .is-pending { color: var(--muted); }
+/* Solutions switch beside the "Problem sheets" title: while it is on, each sheet that has a
+   version with solutions shows that instead */
+.course-sheets-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 1rem 0 0.4rem; }
+.course-sheets-head .course-materials-title { margin: 0; }
+.solutions-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.switch-track {
+  position: relative;
+  width: 1.9rem;
+  height: 1.05rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--bg);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.switch-track::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.12rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--muted);
+  transform: translateY(-50%);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.solutions-toggle:hover { color: var(--accent); }
+.solutions-toggle:hover .switch-track { border-color: var(--accent); }
+.solutions-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.solutions-toggle[aria-checked="true"] { color: var(--accent); }
+.solutions-toggle[aria-checked="true"] .switch-track { background: var(--accent); border-color: var(--accent); }
+.solutions-toggle[aria-checked="true"] .switch-track::after { background: var(--bg); transform: translate(0.85rem, -50%); }
+@media (prefers-reduced-motion: reduce) {
+  .switch-track, .switch-track::after { transition: none; }
+}
+.course-sheets .sheet-solutions { display: none; }
+.show-solutions .course-sheets .sheet-solutions { display: inline-flex; }
+.show-solutions .course-sheets .has-solutions .sheet-plain { display: none; }
+.solutions-note {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 /* TEST: a photo or a syllabus for the course. On wide screens it sits in a box beside the open
    card, like the research diagrams; narrower screens show it at the bottom of the card. A dashed
    placeholder shows until the photo is in the site. */

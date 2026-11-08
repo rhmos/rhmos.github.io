@@ -9,7 +9,9 @@
 #   url          – optional link to a course page or notes (a full URL, or a path like /teaching/linalg/)
 #   description  – optional Markdown
 #   notes        – optional path to lecture notes, e.g. /assets/files/course/lecture-notes.pdf
-#   sheets       – optional list of problem sheets, each with a title and a file path
+#   sheets       – optional list of problem sheets, each with a title and a file path, and
+#                  optionally a solutions path for the sheet with solutions. If any sheet has
+#                  one, a "Solutions" switch appears above the list (off by default).
 # Notes and sheets show inside the opened card, each as a download link once its file is in
 # the site; until then it shows greyed out as "coming soon".
 #   image        – TEST, optional photo path, shown in a box beside the opened card on wide
@@ -53,14 +55,19 @@
       sheets:
         - title: Problem sheet 1
           file: /assets/files/transform-methods/problem-sheet-1.pdf
+          solutions: /assets/files/transform-methods/problem-sheet-1-solns.pdf
         - title: Problem sheet 2
           file: /assets/files/transform-methods/problem-sheet-2.pdf
+          solutions: /assets/files/transform-methods/problem-sheet-2-solns.pdf
         - title: Problem sheet 3
           file: /assets/files/transform-methods/problem-sheet-3.pdf
+          solutions: /assets/files/transform-methods/problem-sheet-3-solns.pdf
         - title: Problem sheet 4
           file: /assets/files/transform-methods/problem-sheet-4.pdf
+          solutions: /assets/files/transform-methods/problem-sheet-4-solns.pdf
         - title: Problem sheet 5
           file: /assets/files/transform-methods/problem-sheet-5.pdf
+          solutions: /assets/files/transform-methods/problem-sheet-5-solns.pdf
 
 - section: Teaching assistant
   courses:
