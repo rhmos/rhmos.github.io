@@ -13,6 +13,9 @@
   <title>{{ page.title }} · {{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | strip_html | escape }}">
   <meta name="author" content="{{ site.author.name }}">
+  {%- comment %} Asks search engines not to list the site or follow its links, so it is found only by
+  those given the link. Don't also block crawlers in a robots.txt: they would then never see this. {% endcomment %}
+  <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
