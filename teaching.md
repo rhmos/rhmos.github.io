@@ -40,16 +40,43 @@ leading tutorial groups for students of mathematics, physics, engineering, compu
         <summary class="course-summary">{{ course_summary }}</summary>
         <div class="course-body">
           <div class="course-desc">{{ course.description | markdownify }}</div>
-          {%- if course.notes or course.sheets %}
+          {%- if course.notes or course.handwritten or course.sheets %}
           {%- comment %} Each file links only once it is in the site; until then it shows as coming soon. {% endcomment %}
           <div class="course-materials">
-            {%- if course.notes %}
-            {%- assign found = site.static_files | where: "path", course.notes %}
-            {%- if found.size > 0 %}
-            <a class="course-notes" href="{{ course.notes | relative_url }}" download>{% include download-icon.html %}Lecture notes</a>
-            {%- else %}
-            <span class="course-notes is-pending">{% include download-icon.html %}Lecture notes <span class="pending-note">coming soon</span></span>
-            {%- endif %}
+            {%- if course.notes or course.handwritten %}
+            {%- comment %} The typed notes on the left, the handwritten ones on the right {% endcomment %}
+            <div class="course-notes-row">
+              {%- if course.notes %}
+              {%- assign found = site.static_files | where: "path", course.notes %}
+              {%- if found.size > 0 %}
+              <a class="course-notes" href="{{ course.notes | relative_url }}" download>{% include download-icon.html %}Lecture notes</a>
+              {%- else %}
+              <span class="course-notes is-pending">{% include download-icon.html %}Lecture notes <span class="pending-note">coming soon</span></span>
+              {%- endif %}
+              {%- endif %}
+              {%- if course.handwritten %}
+              {%- comment %} Pick a lecture, then download its notes; lectures not yet in the site are listed greyed out {% endcomment %}
+              {%- assign first_lecture = nil %}
+              <div class="handwritten-picker">
+                <select class="handwritten-select" aria-label="Lecture for the handwritten notes">
+                  {%- for lecture in course.handwritten %}
+                  {%- assign found = site.static_files | where: "path", lecture.file %}
+                  {%- if found.size > 0 %}
+                  {%- unless first_lecture %}{% assign first_lecture = lecture.file %}{% endunless %}
+                  <option value="{{ lecture.file | relative_url }}">{{ lecture.title }}</option>
+                  {%- else %}
+                  <option disabled>{{ lecture.title }} (coming soon)</option>
+                  {%- endif %}
+                  {%- endfor %}
+                </select>
+                {%- if first_lecture %}
+                <a class="handwritten-download" href="{{ first_lecture | relative_url }}" download>{% include download-icon.html %}Handwritten notes</a>
+                {%- else %}
+                <span class="handwritten-download is-pending">{% include download-icon.html %}Handwritten notes</span>
+                {%- endif %}
+              </div>
+              {%- endif %}
+            </div>
             {%- endif %}
             {%- if course.sheets %}
             {%- assign with_solutions = course.sheets | where_exp: "sheet", "sheet.solutions" %}
@@ -129,5 +156,14 @@ leading tutorial groups for students of mathematics, physics, engineering, compu
       button.setAttribute('aria-checked', on);
       materials.classList.toggle('show-solutions', on);
     });
+  });
+
+  // The handwritten notes' Download button fetches whichever lecture is picked in the dropdown
+  document.querySelectorAll('.handwritten-picker').forEach(function (picker) {
+    var select = picker.querySelector('select'), link = picker.querySelector('a.handwritten-download');
+    if (!link) return;
+    function sync() { link.href = select.value; }
+    select.addEventListener('change', sync);
+    sync();   // browsers may restore an earlier choice on reload
   });
 </script>
